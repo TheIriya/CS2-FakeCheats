@@ -15,7 +15,8 @@ and .NET 10 runtime**. The same managed DLL supports Windows and Linux servers.
 3. On first load, the plugin creates the main configuration and `messages.json`
    under `addons/counterstrikesharp/configs/plugins/FakeCheats/`.
 
-The package includes example JSON files. Existing configuration and message
+The installation ZIP contains only the `addons` directory; the README is
+available in the source repository. The package includes example JSON files. Existing configuration and message
 files are preserved. No `cfg` directory or `server.cfg` is created or modified.
 
 ### Upgrading from FakeCheatsWhitelist

@@ -22,9 +22,8 @@ try {
     # server owner's existing JSON configuration.
     Copy-Item -LiteralPath './FakeCheats.example.json' -Destination $configFolder -Force
     Copy-Item -LiteralPath './messages.example.json' -Destination $configFolder -Force
-    Copy-Item -LiteralPath './README.md' -Destination $packageRoot -Force
     $archive = Join-Path $PSScriptRoot "dist/FakeCheats-$pluginVersion.zip"
-    Compress-Archive -Path (Join-Path $packageRoot '*') -DestinationPath $archive -Force
+    Compress-Archive -Path (Join-Path $packageRoot 'addons') -DestinationPath $archive -Force
     Get-Item -LiteralPath $archive | Select-Object FullName, Length
 } finally {
     Pop-Location
