@@ -1,0 +1,67 @@
+namespace FakeCheats;
+
+// This policy applies only to commands dispatched on the SERVER.
+// Client-local commands never pass through this code.
+public sealed class CommandPolicy
+{
+    public static readonly string[] VisualCommands =
+    [
+        "mat_fullbright", "r_csgo_postprocess_enable", "firstperson",
+        "thirdperson", "incrementvar", "invprev"
+    ];
+
+    // Usercmds (movement, firing, etc.) do not use the console dispatch hook.
+    public static readonly string[] GameplayCommands =
+    [
+        "say", "say_team", "jointeam", "joinclass", "teammenu", "status", "ping",
+        "buy", "autobuy", "rebuy", "drop", "kill", "explode",
+        "spec_next", "spec_prev", "spec_mode", "spec_player", "spec_pos",
+        "spec_menu", "spec_autodirector", "player_ping", "voicemenu",
+        "coverme", "takepoint", "holdpos", "regroup", "followme", "takingfire",
+        "go", "fallback", "sticktog", "getinpos", "stormfront", "report",
+        "roger", "enemyspot", "needbackup", "sectorclear", "inposition",
+        "reportingin", "getout", "negative", "enemydown", "compliment",
+        "thanks", "cheer", "sorry", "needrop", "playerradio",
+        "callvote", "vote", "voted", "listissues", "show_loadout_toggle",
+        "css_fc_status", "css_fc_sync"
+    ];
+
+    private readonly HashSet<string> _allowed = new(
+        VisualCommands.Concat(GameplayCommands), StringComparer.OrdinalIgnoreCase);
+
+    public CommandPolicy(IEnumerable<string> additionalCommands)
+    {
+        foreach (var name in additionalCommands)
+        {
+            if (!IsCommandName(name))
+                throw new ArgumentException($"Invalid additional command name: {name}");
+            _allowed.Add(name);
+        }
+    }
+
+    public bool IsAllowed(bool isRoot, IReadOnlyList<string> args)
+    {
+        if (isRoot) return true;
+        if (args.Count == 0 || !IsCommandName(args[0])) return false;
+        // Native noclip's FCVAR_CHEAT is removed while our permission hook is
+        // installed. Never let configuration opt regular players into it.
+        if (args[0].Equals("noclip", StringComparison.OrdinalIgnoreCase)) return false;
+        if (!_allowed.Contains(args[0])) return false;
+
+        // These variables must never be set globally through a server command.
+        // The original local commands are enabled by sv_cheats spoofing instead.
+        if (args[0].Equals("mat_fullbright", StringComparison.OrdinalIgnoreCase)
+            || args[0].Equals("r_csgo_postprocess_enable", StringComparison.OrdinalIgnoreCase)
+            || args[0].Equals("incrementvar", StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        return true;
+    }
+
+    public static bool IsCommandName(string? value) => !string.IsNullOrEmpty(value)
+        && value.Length <= 128
+        && value.All(c => char.IsAsciiLetterOrDigit(c) || c is '_' or '+' or '-');
+
+    public static bool IsSingleCommand(string value) => value.Length is > 0 and <= 1024
+        && !value.Any(c => char.IsControl(c) || c == ';');
+}

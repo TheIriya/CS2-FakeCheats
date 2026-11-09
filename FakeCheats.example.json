@@ -1,0 +1,6 @@
+{
+  "ConfigVersion": 1,
+  "Language": "en",
+  "ReplicateIntervalSeconds": 3,
+  "AdditionalAllowedServerCommands": []
+}

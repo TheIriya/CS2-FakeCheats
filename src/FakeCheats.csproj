@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <Version>1.0.8</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="../messages.example.json" LogicalName="FakeCheats.messages.json" />
+    <PackageReference Include="CounterStrikeSharp.API" Version="1.0.379" ExcludeAssets="runtime" />
+  </ItemGroup>
+</Project>

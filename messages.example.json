@@ -1,0 +1,110 @@
+{
+  "command_denied": {
+    "en": "[FakeCheats] This server command is not whitelisted. Only @css/root can bypass this restriction.",
+    "zhcn": "[FakeCheats] 此服务端命令不在白名单内；仅 @css/root 可绕过限制。"
+  },
+  "status_summary": {
+    "en": "[FakeCheats] fakecheats_enabled={0}; real server sv_cheats={1}; client spoof={2}; access={3}",
+    "zhcn": "[FakeCheats] 假作弊开关={0}；真实服务端 sv_cheats={1}；客户端伪装={2}；权限={3}"
+  },
+  "status_sent": {
+    "en": "{0} (sent, not verified)",
+    "zhcn": "{0}（已发送，未验证客户端接收）"
+  },
+  "status_pending": {
+    "en": "pending world initialization",
+    "zhcn": "等待游戏世界初始化"
+  },
+  "role_server": { "en": "server/RCON", "zhcn": "服务器/RCON" },
+  "role_root": { "en": "@css/root", "zhcn": "@css/root" },
+  "role_whitelist": { "en": "whitelist", "zhcn": "白名单" },
+  "world_pending": {
+    "en": "[FakeCheats] The map is not ready. Synchronization will start automatically after world initialization.",
+    "zhcn": "[FakeCheats] 地图尚未就绪，将在游戏世界初始化后自动同步。"
+  },
+  "sync_done": {
+    "en": "[FakeCheats] Client sv_cheats={0} has been sent again. Real server sv_cheats remains 0.",
+    "zhcn": "[FakeCheats] 已重新发送客户端 sv_cheats={0}；真实服务端保持 0。"
+  },
+  "switch_denied": {
+    "en": "[FakeCheats] Only @css/root or the server console can change the global switch.",
+    "zhcn": "[FakeCheats] 全服开关仅供 @css/root 或服务端使用。"
+  },
+  "switch_status": {
+    "en": "[FakeCheats] fakecheats_enabled={0}; 0=off, 1=on.",
+    "zhcn": "[FakeCheats] fakecheats_enabled={0}；0=关闭，1=开启。"
+  },
+  "switch_usage": {
+    "en": "[FakeCheats] Usage: {0} 0 or {0} 1.",
+    "zhcn": "[FakeCheats] 用法：{0} 0 或 {0} 1。"
+  },
+  "switch_changed": {
+    "en": "[FakeCheats] Global visual fake cheats are {0}. Real server sv_cheats remains 0.",
+    "zhcn": "[FakeCheats] 全服视觉假作弊已{0}，真实服务端 sv_cheats 保持 0。"
+  },
+  "state_enabled": { "en": "enabled", "zhcn": "开启" },
+  "state_disabled": { "en": "disabled", "zhcn": "关闭" },
+  "noclip_denied": {
+    "en": "[FakeCheats] Noclip is available only to in-game players with @css/root.",
+    "zhcn": "[FakeCheats] 穿墙仅供游戏内 @css/root 使用。"
+  },
+  "noclip_usage": {
+    "en": "[FakeCheats] Usage: noclip or css_fc_noclip (run again to turn it off).",
+    "zhcn": "[FakeCheats] 用法：noclip 或 css_fc_noclip（再次执行关闭）。"
+  },
+  "noclip_alive_required": {
+    "en": "[FakeCheats] The map must be ready and you must be alive to use noclip.",
+    "zhcn": "[FakeCheats] 请在地图就绪、玩家存活时使用穿墙。"
+  },
+  "noclip_disabled": { "en": "[FakeCheats] Noclip disabled.", "zhcn": "[FakeCheats] 穿墙已关闭。" },
+  "noclip_enabled": { "en": "[FakeCheats] Noclip enabled.", "zhcn": "[FakeCheats] 穿墙已开启。" },
+  "exec_denied": {
+    "en": "[FakeCheats] This command is available only to in-game players with @css/root.",
+    "zhcn": "[FakeCheats] 此命令仅供游戏内 @css/root 使用。"
+  },
+  "exec_usage": {
+    "en": "[FakeCheats] Usage: css_fc_exec <one server command and its arguments>, for example css_fc_exec noclip. Semicolons and line breaks are not allowed.",
+    "zhcn": "[FakeCheats] 用法：css_fc_exec <一个服务端命令及参数>，例如 css_fc_exec noclip；不接受分号或换行。"
+  },
+  "exec_noclip_usage": {
+    "en": "[FakeCheats] Usage: css_fc_exec noclip (run again to turn it off).",
+    "zhcn": "[FakeCheats] 用法：css_fc_exec noclip（再次执行关闭）。"
+  },
+  "exec_submitted": {
+    "en": "[FakeCheats] Server command submitted. Its effect depends on the engine and the command's own checks.",
+    "zhcn": "[FakeCheats] 已提交服务端命令；是否生效由引擎及命令自身检查决定。"
+  },
+  "description_status": { "en": "Show fake cheats status", "zhcn": "查看假作弊状态" },
+  "description_sync": { "en": "Re-send the current client sv_cheats value", "zhcn": "重新发送当前客户端 sv_cheats 值" },
+  "description_exec": { "en": "ROOT: dispatch one server command in your player context", "zhcn": "ROOT：以自己的玩家上下文执行一个服务端命令" },
+  "description_noclip": { "en": "ROOT: toggle noclip without enabling real sv_cheats", "zhcn": "ROOT：不启用真实 sv_cheats，直接切换穿墙" },
+  "description_enabled": { "en": "ROOT: query/set fakecheats_enabled (0/1)", "zhcn": "ROOT：查询或设置 fakecheats_enabled（0/1）" },
+  "log_loaded": {
+    "en": "FakeCheats {0} loaded: real sv_cheats=0; waiting for a world update before accessing players.",
+    "zhcn": "FakeCheats {0} 已加载：真实 sv_cheats=0；等待游戏世界更新后再读取玩家。"
+  },
+  "log_switch_changed": {
+    "en": "fakecheats_enabled={0}; real sv_cheats remains 0.",
+    "zhcn": "fakecheats_enabled={0}；真实 sv_cheats 保持 0。"
+  },
+  "log_real_cheats_reset": {
+    "en": "Real sv_cheats was enabled externally; resetting it to 0.",
+    "zhcn": "外部配置或插件启用了真实 sv_cheats，正在重置为 0。"
+  },
+  "log_sync_postponed": {
+    "en": "Player synchronization postponed: CS2 global variables are not available.",
+    "zhcn": "CS2 全局变量尚不可用，已推迟玩家同步。"
+  },
+  "log_native_noclip_ready": {
+    "en": "Native noclip access enabled. Player requests require @css/root; real sv_cheats remains 0.",
+    "zhcn": "原生 noclip 入口已启用；玩家请求需有 @css/root，真实 sv_cheats 保持 0。"
+  },
+  "log_native_noclip_failed": {
+    "en": "Native noclip access could not be enabled on this engine build. css_fc_noclip remains available to root.",
+    "zhcn": "当前引擎版本无法启用原生 noclip 入口，root 仍可使用 css_fc_noclip。"
+  },
+  "log_language_file_failed": {
+    "en": "Could not load language file '{0}'. Built-in messages will be used.",
+    "zhcn": "无法加载语言文件“{0}”，将使用内置提示。"
+  }
+}

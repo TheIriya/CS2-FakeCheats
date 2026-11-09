@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../src/CommandPolicy.cs" Link="CommandPolicy.cs" />
+    <Compile Include="../src/WorldLifecycle.cs" Link="WorldLifecycle.cs" />
+    <Compile Include="../src/DeferredConVarSync.cs" Link="DeferredConVarSync.cs" />
+    <Compile Include="../src/MessageCatalog.cs" Link="MessageCatalog.cs" />
+    <Compile Include="../src/NativeNoclipAccess.cs" Link="NativeNoclipAccess.cs" />
+    <EmbeddedResource Include="../messages.example.json" LogicalName="FakeCheats.messages.json" />
+  </ItemGroup>
+</Project>
