@@ -1,15 +1,15 @@
 # FakeCheats
 
-A CounterStrikeSharp plugin for CS2 community servers. The real server keeps
+A [CounterStrikeSharp](https://github.com/roflmuffin/counterstrikesharp) plugin for CS2 community servers. The real server keeps
 `sv_cheats=0`. When fake cheats are enabled, players receive a client-side
 `sv_cheats=1` value to allow supported local visual commands.
 
-Version: **1.0.8**. Requires **CounterStrikeSharp 1.0.379+ with a compatible API
+Requires **[CounterStrikeSharp](https://github.com/roflmuffin/counterstrikesharp) 1.0.379+ with a compatible API
 and .NET 10 runtime**. The same managed DLL supports Windows and Linux servers.
 
 ## Installation
 
-1. Extract `FakeCheats-1.0.8.zip` and merge its `addons` directory into
+1. Extract `FakeCheats.zip` and merge its `addons` directory into
    your server's `game/csgo/` directory.
 2. Restart the server and check `css_plugins list`.
 3. On first load, the plugin creates the main configuration and `messages.json`
@@ -131,7 +131,7 @@ bind "v" "css_fc_noclip"
 ```
 
 Native access uses `VEngineCvar007` and the ICvar layout from the s2sdk revision
-pinned by CounterStrikeSharp 1.0.379. Future engine ABI changes may require an
+pinned by [CounterStrikeSharp](https://github.com/roflmuffin/counterstrikesharp) 1.0.379. Future engine ABI changes may require an
 update. Startup logs report whether native access was enabled; if lookup fails,
 the alternate plugin commands remain available. Engine-side behavior is not
 verified by the local native-memory tests. With fake cheats disabled, client-side
