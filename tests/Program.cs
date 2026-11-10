@@ -14,8 +14,7 @@ foreach (var name in new[]
 {
     "noclip", "NoClip", "god", "buddha", "give", "ent_fire", "ent_create",
     "bot_add", "sv_cheats", "host_timescale", "exec", "toggle", "setvar",
-    "css_noclip", "css_fc_noclip", "css_fc_exec", "fakecheats_enabled", "css_fc_enabled",
-    "unknown_future_cheat", "thirdperson;noclip",
+    "thirdperson;noclip",
     "thirdperson\nnoclip", "cmd noclip", ""
 })
 {
@@ -48,7 +47,20 @@ Check(!policy.IsAllowed(false, ["incrementvar", "host_timescale", "0", "5", "1"]
 
 var extended = new CommandPolicy(["css_rtv"]);
 Check(extended.IsAllowed(false, ["CSS_RTV"]), "Explicit plugin command opt-in is case-insensitive");
-Check(!extended.IsAllowed(false, ["css_noclip"]), "Opt-in never grants entire css_ prefix");
+// Plugin commands must reach their own callbacks and permission checks, even
+// without css_ prefixes, without configuration, or with cheat-like names.
+foreach (var name in new[]
+{
+    "css_rtv", "CSS_NOMINATE", "css_noclip", "css_fc_noclip", "css_fc_exec",
+    "fakecheats_enabled", "css_fc_enabled", "rtv", "menu", "sm_shop",
+    "myplugin_give", "ent_custommenu", "sv_customvote", "unknown_future_command",
+    "shop.open", "plugin:menu", "自定义菜单"
+})
+    Check(policy.IsAllowed(false, [name, "example argument"]), $"Plugin or unknown command passes through: {name}");
+Check(!policy.IsAllowed(false, ["ent_remove", "!self"]), "Official command outside the old deny examples stays restricted");
+Check(!policy.IsAllowed(false, ["mp_restartgame", "1"]), "Official server variable stays restricted");
+var officialOptIn = new CommandPolicy(["mp_restartgame"]);
+Check(officialOptIn.IsAllowed(false, ["MP_RESTARTGAME", "1"]), "Existing exact-name opt-ins still allow official commands");
 var noclipOptIn = new CommandPolicy(["noclip"]);
 Check(!noclipOptIn.IsAllowed(false, ["noclip"]), "Native noclip cannot be granted to non-root through configuration");
 Check(!noclipOptIn.IsAllowed(false, ["NOCLIP"]), "Native noclip root requirement is case-insensitive");

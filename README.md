@@ -67,7 +67,7 @@ Connection, spawn, round-start, and periodic synchronization all use the latest
 setting. A command received before the world is ready is applied when world
 initialization completes. Real server `sv_cheats` remains `0` in either state.
 
-The visual switch is independent of the server command whitelist and root
+The visual switch is independent of the official server command whitelist and root
 noclip. Plugin reload resets the switch to its default; reapply your preferred
 value after a reload if needed. The next normal execution of `server.cfg` uses
 the value you placed there.
@@ -215,9 +215,10 @@ its built-in catalog. Other language codes are rejected in the main config.
 Reload the plugin or restart the server after editing either JSON file. Existing
 custom messages are never overwritten during loading or installation.
 
-## Server command whitelist
+## Official server command whitelist
 
-Unknown server commands are denied for regular players, including `noclip`,
+Only known official CS2 command and ConVar names are subject to the whitelist.
+Regular players cannot dispatch restricted official names such as `noclip`,
 `god`, `give`, `ent_fire`, and `ent_create`. Root bypasses this plugin's gate.
 Server console and RCON retain their administrative command access. The plugin
 restores real `sv_cheats=0` on the next world update if another configuration
@@ -227,14 +228,26 @@ Common chat, buying, dropping, team, voting, spectator, and radio commands are
 allowed. Movement and shooting use player input data and are unaffected. See
 `src/CommandPolicy.cs` for the complete built-in command list.
 
-Add other plugins' regular player commands by exact name, for example:
+Third-party commands pass through automatically, including commands without a
+`css_` prefix. They do not need entries in `AdditionalAllowedServerCommands`.
+Their owning plugins remain responsible for permission checks. FakeCheats'
+own administrative command handlers also retain their root permission checks.
+
+`src/official-commands.txt` contains the embedded official-name catalog and its
+pinned GameTracking-CS2 source revision. It is loaded locally; the server does
+not download command lists. Names absent from this snapshot pass through, so
+the catalog needs updating when CS2 adds new official commands. A plugin using
+the exact same name as an official command is subject to that name's policy.
+
+`AdditionalAllowedServerCommands` remains compatible with existing configs and
+can allow extra official names by exact name, for example:
 
 ```json
-"AdditionalAllowedServerCommands": ["css_rtv", "css_nominate"]
+"AdditionalAllowedServerCommands": ["mp_restartgame"]
 ```
 
-Wildcards such as `*` or `css_*` are rejected. Third-party plugins still need
-their own correct permission checks. Denial messages are limited to once every
+Wildcards such as `*` or `css_*` are rejected. Native `noclip` remains root-only
+even if listed here. Denial messages are limited to once every
 two seconds per player. `ReplicateIntervalSeconds` must be between 1 and 60.
 
 ## Client-side limitations
@@ -248,8 +261,8 @@ Explicitly forwarding `mat_fullbright`, `r_csgo_postprocess_enable`, or
 `incrementvar` to the server is denied for regular players to prevent changes
 to server-wide variables. Normal local execution is unaffected. Disabling fake
 cheats sends `sv_cheats=0`; restoration of local visual and camera state depends
-on CS2. Root access bypasses this plugin's whitelist, not every engine or
-third-party restriction.
+on CS2. Root access bypasses this plugin's official command whitelist, not every
+engine or third-party restriction.
 
 The plugin waits for world initialization before reading players and invalidates
 queued initialization tasks on map changes or unload. Unload sends `sv_cheats=0`
@@ -264,7 +277,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
 The script runs command policy, lifecycle, and localization checks, compiles the
-plugin, and creates `dist/FakeCheats.zip`. Initial dependency
+plugin, and creates `dist/FakeCheats-1.0.10.zip`. Initial dependency
 restore requires network access. Source and configuration comments are English.
 
 There is no running CS2 server in the build environment. Compilation and local

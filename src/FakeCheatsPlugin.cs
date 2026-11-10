@@ -14,9 +14,9 @@ namespace FakeCheats;
 public sealed class FakeCheatsPlugin : BasePlugin, IPluginConfig<FakeCheatsConfig>
 {
     public override string ModuleName => "FakeCheats";
-    public override string ModuleVersion => "1.0.9";
+    public override string ModuleVersion => "1.0.10";
     public override string ModuleAuthor => "TheIriya";
-    public override string ModuleDescription => "Client sv_cheats spoof with a server command whitelist.";
+    public override string ModuleDescription => "Client sv_cheats spoof with an official CS2 command whitelist.";
 
     public FakeCheatsConfig Config { get; set; } = new();
     // Keep the switch in managed memory: dynamic engine ConVar creation can
@@ -265,7 +265,8 @@ public sealed class FakeCheatsPlugin : BasePlugin, IPluginConfig<FakeCheatsConfi
             _lastDenial[player.Slot] = now;
             player.PrintToConsole(Message("command_denied"));
         }
-        // Stop also prevents other CSS command callbacks handling this request.
+        // Only restricted official commands stop here. Third-party commands
+        // continue to their own callbacks and permission checks.
         return HookResult.Stop;
     }
 

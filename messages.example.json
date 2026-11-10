@@ -1,7 +1,7 @@
 {
   "command_denied": {
-    "en": "[FakeCheats] This server command is not whitelisted. Only @css/root can bypass this restriction.",
-    "zhcn": "[FakeCheats] 此服务端命令不在白名单内；仅 @css/root 可绕过限制。"
+    "en": "[FakeCheats] This official CS2 server command is not whitelisted. Only @css/root can bypass this restriction.",
+    "zhcn": "[FakeCheats] 此 CS2 官方服务端命令不在白名单内；仅 @css/root 可绕过限制。"
   },
   "status_summary": {
     "en": "[FakeCheats] fakecheats_enabled={0}; real server sv_cheats={1}; client spoof={2}; access={3}",
@@ -17,7 +17,7 @@
   },
   "role_server": { "en": "server/RCON", "zhcn": "服务器/RCON" },
   "role_root": { "en": "@css/root", "zhcn": "@css/root" },
-  "role_whitelist": { "en": "whitelist", "zhcn": "白名单" },
+  "role_whitelist": { "en": "official command whitelist", "zhcn": "官方命令白名单" },
   "world_pending": {
     "en": "[FakeCheats] The map is not ready. Synchronization will start automatically after world initialization.",
     "zhcn": "[FakeCheats] 地图尚未就绪，将在游戏世界初始化后自动同步。"

@@ -4,6 +4,10 @@ namespace FakeCheats;
 // Client-local commands never pass through this code.
 public sealed class CommandPolicy
 {
+    // A vanilla-game catalog distinguishes official names from third-party
+    // commands without relying on plugin prefixes, registration order or ABI.
+    private static readonly HashSet<string> OfficialCommands = LoadOfficialCommands();
+
     public static readonly string[] VisualCommands =
     [
         "mat_fullbright", "r_csgo_postprocess_enable", "firstperson",
@@ -42,11 +46,10 @@ public sealed class CommandPolicy
     public bool IsAllowed(bool isRoot, IReadOnlyList<string> args)
     {
         if (isRoot) return true;
-        if (args.Count == 0 || !IsCommandName(args[0])) return false;
+        if (args.Count == 0 || !IsSingleCommand(args[0]) || args[0].Any(char.IsWhiteSpace)) return false;
         // Native noclip's FCVAR_CHEAT is removed while our permission hook is
         // installed. Never let configuration opt regular players into it.
         if (args[0].Equals("noclip", StringComparison.OrdinalIgnoreCase)) return false;
-        if (!_allowed.Contains(args[0])) return false;
 
         // These variables must never be set globally through a server command.
         // The original local commands are enabled by sv_cheats spoofing instead.
@@ -55,7 +58,26 @@ public sealed class CommandPolicy
             || args[0].Equals("incrementvar", StringComparison.OrdinalIgnoreCase))
             return false;
 
-        return true;
+        // Unknown names belong to the engine or other plugins to handle. In
+        // particular, plugin callbacks must run their own permission checks.
+        return !OfficialCommands.Contains(args[0]) || _allowed.Contains(args[0]);
+    }
+
+    private static HashSet<string> LoadOfficialCommands()
+    {
+        using var stream = typeof(CommandPolicy).Assembly.GetManifestResourceStream("FakeCheats.official-commands.txt")
+            ?? throw new InvalidOperationException("The embedded official CS2 command catalog is missing.");
+        using var reader = new StreamReader(stream);
+        var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        while (reader.ReadLine() is { } line)
+        {
+            var name = line.Trim();
+            if (name.Length == 0 || name.StartsWith('#')) continue;
+            if (!IsCommandName(name))
+                throw new InvalidOperationException($"Invalid official CS2 command name: {name}");
+            names.Add(name);
+        }
+        return names;
     }
 
     public static bool IsCommandName(string? value) => !string.IsNullOrEmpty(value)

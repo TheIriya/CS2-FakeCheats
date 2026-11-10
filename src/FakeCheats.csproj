@@ -6,10 +6,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="../messages.example.json" LogicalName="FakeCheats.messages.json" />
+    <EmbeddedResource Include="official-commands.txt" LogicalName="FakeCheats.official-commands.txt" />
     <PackageReference Include="CounterStrikeSharp.API" Version="1.0.379" ExcludeAssets="runtime" />
   </ItemGroup>
 </Project>

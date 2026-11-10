@@ -14,5 +14,6 @@
     <Compile Include="../src/MessageCatalog.cs" Link="MessageCatalog.cs" />
     <Compile Include="../src/NativeNoclipAccess.cs" Link="NativeNoclipAccess.cs" />
     <EmbeddedResource Include="../messages.example.json" LogicalName="FakeCheats.messages.json" />
+    <EmbeddedResource Include="../src/official-commands.txt" LogicalName="FakeCheats.official-commands.txt" />
   </ItemGroup>
 </Project>
