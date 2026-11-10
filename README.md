@@ -260,7 +260,7 @@ to connected players and restores noclip changes owned by this plugin.
 With .NET 10 SDK installed, run PowerShell from this project directory:
 
 ```powershell
-./build.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
 The script runs command policy, lifecycle, and localization checks, compiles the
