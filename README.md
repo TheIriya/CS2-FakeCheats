@@ -264,7 +264,7 @@ With .NET 10 SDK installed, run PowerShell from this project directory:
 ```
 
 The script runs command policy, lifecycle, and localization checks, compiles the
-plugin, and creates `dist/FakeCheats-1.0.8.zip`. Initial dependency
+plugin, and creates `dist/FakeCheats.zip`. Initial dependency
 restore requires network access. Source and configuration comments are English.
 
 There is no running CS2 server in the build environment. Compilation and local

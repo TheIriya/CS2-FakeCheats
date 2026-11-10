@@ -24,6 +24,15 @@ foreach (var name in new[]
 }
 
 Check(!policy.IsAllowed(false, []), "Empty dispatch fails closed");
+// Keep this sequence explicit: iterating GameplayCommands alone cannot catch a
+// missing command in CS2's connection and team-selection flow.
+foreach (var teamCommand in new string[][]
+{
+    ["joingame"], ["JOINGAME"], ["teammenu"],
+    ["jointeam", "2"], ["jointeam", "3"], ["jointeam", "0"],
+    ["jointeam", "1"], ["joinclass", "0"]
+})
+    Check(policy.IsAllowed(false, teamCommand), $"Non-root can enter the game and select a team: {string.Join(' ', teamCommand)}");
 foreach (var name in CommandPolicy.GameplayCommands)
     Check(policy.IsAllowed(false, [name, "example argument"]), $"Normal command: {name}");
 foreach (var name in new[] { "firstperson", "THIRDPERSON", "invprev" })

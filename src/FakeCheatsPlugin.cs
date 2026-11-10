@@ -14,9 +14,9 @@ namespace FakeCheats;
 public sealed class FakeCheatsPlugin : BasePlugin, IPluginConfig<FakeCheatsConfig>
 {
     public override string ModuleName => "FakeCheats";
-    public override string ModuleVersion => "1.0.8";
-    public override string ModuleAuthor => "Community";
-    public override string ModuleDescription => "Client sv_cheats spoof with a server command whitelist and @css/root bypass.";
+    public override string ModuleVersion => "1.0.9";
+    public override string ModuleAuthor => "TheIriya";
+    public override string ModuleDescription => "Client sv_cheats spoof with a server command whitelist.";
 
     public FakeCheatsConfig Config { get; set; } = new();
     // Keep the switch in managed memory: dynamic engine ConVar creation can

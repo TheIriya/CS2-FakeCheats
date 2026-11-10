@@ -13,7 +13,7 @@ public sealed class CommandPolicy
     // Usercmds (movement, firing, etc.) do not use the console dispatch hook.
     public static readonly string[] GameplayCommands =
     [
-        "say", "say_team", "jointeam", "joinclass", "teammenu", "status", "ping",
+        "say", "say_team", "joingame", "jointeam", "joinclass", "teammenu", "status", "ping",
         "buy", "autobuy", "rebuy", "drop", "kill", "explode",
         "spec_next", "spec_prev", "spec_mode", "spec_player", "spec_pos",
         "spec_menu", "spec_autodirector", "player_ping", "voicemenu",
